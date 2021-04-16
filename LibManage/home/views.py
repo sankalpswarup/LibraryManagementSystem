@@ -2,13 +2,14 @@ from django.shortcuts import render,HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("this is homepage")
+    context = {
+        'variable':"this is sent"
+    }
+    return render(request, 'index.html', context)
 
-def login(request):
-    return HttpResponse("this is login page")
 
 def book(request):
-    return HttpResponse("this is book page")
+    return render(request, 'book.html')
 
 def profile(request):
-    return HttpResponse("this is profile page")
+    return render(request, 'profile.html')

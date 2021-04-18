@@ -9,6 +9,7 @@ class Book(models.Model):
     genre = models.CharField(max_length=100)
     available = models.CharField(max_length=50)
     summary = models.TextField()
+    objects = models.Manager() # this is written because VSC was giving error that class has no objcts
     def __str__(self):
         return self.title 
 

@@ -10,7 +10,7 @@ variables are specified in base.html, thos can be changed {% endcomment %}
 
 <div id='register'>
     <h3>New User, Register here</h3>
-    <form action='/register' method='POST' required>
+    {% comment %} <form action='/register' method='POST' required>
     {% csrf_token %}
         <label for="username">Username:</label>
         <input type="text" id="username" name="username"><br>
@@ -19,9 +19,19 @@ variables are specified in base.html, thos can be changed {% endcomment %}
         <input type="email" id="email" name="email"><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br>
+        <input type="text" id="password" name="password"><br>
 
         <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+    </form> {% endcomment %}
+
+    <form method="post">
+    {% csrf_token %}
+    {% for field in form  %}
+        <b>{{ field.label_tag }}</b> : {{ field }} 
+        <br>
+    {%endfor%}
+    {% comment %} {{form}} {% endcomment %}
+    <input type="submit" value="Register">
+</form>
 </div>
 {% endblock body %}

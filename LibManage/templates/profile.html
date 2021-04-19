@@ -5,7 +5,32 @@ variables are specified in base.html, thos can be changed {% endcomment %}
 {% block body %}
 <h3>This is my profile page</h3>
 <p>
-        {{ user.username}}
-        {{ user.email }}
+    <b>Name:</b>{{ user.username}}<br>
+    <b>Email:</b>{{ user.email }}<br>
+    <b>Account Type:</b>{{ user.profile.account_type }}<br>
 </p>
+
+<a href="logout_user"><button>Logout</button></a>
+{% comment %} <a href="change_access"><button>Change Access</button></a> {% endcomment %}
+
+{% ifnotequal user.profile.account_type 'user' %}
+    <hr>
+    <h4>Book Borrowing Requests</h4>
+    {% for request in book_requests %} 
+        <form action='profile' method='post'>
+        {% csrf_token %}
+        <input type="hidden" name= 'id' value={{request.id}}>
+        <p><b>Book Requested:</b>{{request.title}}  by   <b>User:</b>{{request.user}}
+        <button type='submit'>Accept Request</button>
+        </p>    
+        <form>
+        
+    {% endfor %}
+    
+    <hr>
+    <h4>Books Borrowed</h4>
+    {% for request in borrowed_books %}
+        <p><b>Borrowed Book:</b>{{request.title}}  by   <b>User:</b>{{request.user}} </p>   
+    {% endfor %}
+{% endifnotequal %}
 {% endblock body %}

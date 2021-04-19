@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}LibManage{% endblock title %}
+{% block body %}
+<h3 style="align:center">Edit Book</h3>
+<form action="/edit_book" method="post" Required>
+{% csrf_token %}
+  <label for="title">Title:</label><br>
+  <input type="text" id="title" name="title" value='{{title}}'><br>
+  <br>
+  <label for="ISBN">ISBN:</label><br>
+  <input type="text" id="ISBN" name="ISBN" value='{{isbn}}'><br>
+  <br>
+  <label for="">author</label><br>
+  <input type="text" id="author" name="author" value='{{author}}'><br>
+  <br>
+  <label for="publication">publication</label><br>
+  <input type="text" id="publication" name="publication" value='{{publication}}'><br>
+  <br>
+  <label for="genre">Genre:</label><br>
+  <input type="text" id="genre" name="genre" value='{{genre}}'><br>
+  <br>
+  <label for="available">Availability</label><br>
+  <input type="text" id="available" name="available" value='{{available}}'><br>
+  <br>
+  <label for="summary">Summary</label><br>
+  <input type="textarea" id="summary" name="summary" value='{{summary}}'><br>
+  <br>
+  <input type='hidden' value={{id}} name='id'>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+{% endblock body %}

@@ -19,7 +19,8 @@ class Book(models.Model):
 class BookRequest(models.Model):
     user = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=100)
-    title = models.CharField(max_length=200)    
+    title = models.CharField(max_length=200)  
+    author = models.CharField(max_length=200)  
     objects = models.Manager()
     def __str__(self):
         str="Title:"+self.title+" ---- User:"+self.user 
@@ -29,6 +30,7 @@ class BorrowedBook(models.Model):
     user = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=100)
     title = models.CharField(max_length=200) 
+    author = models.CharField(max_length=200)
     objects = models.Manager()
     def __str__(self):
         str="Title:"+self.title+" ---- User:"+self.user 

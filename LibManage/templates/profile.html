@@ -30,7 +30,26 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     <hr>
     <h4>Books Borrowed</h4>
     {% for request in borrowed_books %}
-        <p><b>Borrowed Book:</b>{{request.title}}  by   <b>User:</b>{{request.user}} </p>   
+        <form action='book_returned' method='post'>
+        {% csrf_token %}
+            <p><b>Borrowed Book:</b>{{request.title}}  by   <b>User:</b>{{request.user}} 
+            <input type="hidden" name= 'id' value={{request.id}}>
+            <button type='submit'>Book Returned</button>
+            </p>
+        </form>   
+    <hr>
     {% endfor %}
+{% else %}
+    <hr>
+    <h4>Books Requested by you</h4>
+    {% for request in book_requests %}
+        <p><b>Book Title:</b>{{request.title}} | <b>Author:</b>{{request.author}}</p>
+    {% endfor %}
+    <hr>
+    <h4>Books Borrowed by you</h4>
+    {% for request in borrowed_books %}
+        <p><b>Book Title:</b>{{request.title}} | <b>Author:</b>{{request.author}}</p>
+    {% endfor %}
+    <hr>
 {% endifnotequal %}
 {% endblock body %}

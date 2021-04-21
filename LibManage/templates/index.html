@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
-{% comment %} after extending from base.html, wherever 
-variables are specified in base.html, thos can be changed {% endcomment %}
-
-{% block title %}LibManage{% endblock title %}
+{% block title %}Login{% endblock title %}
 {% block body %}
+    
 
-    {% for bookitem in allBooks %}
-        <form action='\bookpage' method='post'>
-        {% csrf_token %}
-            <h5>Title : {{bookitem.title}}</h5>
-            <p>Author : {{bookitem.author}}
-            <input type='hidden' value={{bookitem.id}} name='id'>
-            <button type='submit'>Open</button>
-            </p>
-            <hr>
-        </form>
-    {%endfor%}
-
+    <form action='all_books'>
+        <button type='submit'>View All Books in Library</button>
+    </form>
+    <hr>
+    <form action='sort_genre' method='post'>
+    {% csrf_token %}
+        <label for="genre">Select Genre:</label><br>
+        <select id='genre' name='genre'>
+            <option value='Science & Technology'>Science & Technology</option>
+            <option value='Humanities & Social Sciences'>Humanities & Social Sciences</option>
+            <option value='Fiction'>Fiction</option>
+            <option value='Romance'>Romance</option>
+            <option value='Graphic Novel'>Graphic Novel</option>
+            <option value='Short Story & Essays'>Short Story & Essays</option>
+            <option value='Poem'>Poem</option>
+            <option value='Memoir & Autobiography'>Memoir & Autobiography</option>
+            <option value='Food & Drink'>Food & Drink</option>
+            <option value='Art & Photography'>Art & Photography</option>
+            <option value='Self-help & Personal Growth'>Self-help & Personal Growth</option>
+            <option value='Mythology'>Mythology</option>
+            <option value='Travel'>Travel</option>
+        </select>
+        <button type='submit'>GO!</button>
+    </form>
+    <hr>
 {% endblock body %}

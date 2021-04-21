@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% comment %} after extending from base.html, wherever 
+variables are specified in base.html, thos can be changed {% endcomment %}
+{% block title %}LibManage{% endblock title %}
+{% block body %}
+
+{% ifnotequal user.profile.account_type 'user' %}
+    <hr>
+    <h4>Book Borrowing Requests</h4>
+    {% for item in book_requests %} 
+        <p><b>Book Requested:</b>{{item.title}}  by   <b>User:</b>{{item.user}}</p>
+        <p>
+        <b>For Period:</b>{{item.period}} days
+        <form action='request_accepted' method='post' required>
+        {% csrf_token %}
+        <input type="hidden" name= 'id' value={{item.id}}>
+        <button type='submit'>Accept Request</button>   
+        </form>
+
+        <form action='request_rejected' method='post'>
+        {% csrf_token %}
+            <input type="hidden" name= 'id' value={{item.id}}>
+            <button type='submit'>Reject Request</button>   
+        </form>
+        </p> 
+    {% endfor %}
+    
+    <hr>
+    <h4>Books Borrowed</h4>
+    {% for request in borrowed_books %}
+        <form action='book_returned' method='post'>
+        {% csrf_token %}
+            <p><b>Borrowed Book:</b>{{request.title}}  by   <b>User:</b>{{request.user}} </p>
+            <p><b>Date of Issue:</b>{{request.date}}  |  <b>Due Date to return:</b>{{request.due_date}}
+            <input type="hidden" name= 'id' value={{request.id}}>
+            <button type='submit'>Book Returned</button>
+            </p>
+        </form>   
+    <hr>
+    {% endfor %}
+{% else %}
+    <hr>
+    <h4>Your Current pending requests:</h4>
+    <p><u>If you are unable to see some requests, they might be rejected by the librarian,
+     or accepted, in which case you should see that book in <b>Borrowed Books</b> section</u><p>
+    {% for request in book_requests %}
+        <p><b>Book Title:</b>{{request.title}} | <b>Author:</b>{{request.author}}  |  For Period:{{request.period}}</p>
+    {% endfor %}
+    <hr>
+    <h4>Books Borrowed by you</h4>
+    {% for borrowed_book in borrowed_books %}
+        <p><b>Book Title:</b>{{borrowed_book.title}} | <b>Author:</b>{{borrowed_book.author}}</p>
+        <p><b>Date of Issue:</b>{{borrowed_book.date}}  |  <b>Due Date to return:</b>{{borrowed_book.due_date}}
+        <form action="renew_period" method='post'>
+        {% csrf_token %}
+        <input type='hidden' value={{borrowed_book.id}} name='id'>
+        <label for='period'>Extend Issue Periods by:</label>
+            <select id='period' name='period'>
+                <option value="2">2 days</option>
+                <option value="5">5 days</option>
+                <option value="7">7 days</option>
+                <option value="10">10 days</option>
+                <option value="14">14 days</option>
+            </select>
+        <button type='submit'>Renew Period of Borrowing</button>
+        </form>
+        
+        <form action="book_lost" method='post'>
+        {% csrf_token %}
+        <input type='hidden' value={{borrowed_book.id}} name='id'>
+        <button type='submit'>Book Lost</button>
+        </form>
+    {% endfor %}
+    <hr>
+{% endifnotequal %}
+{% endblock body %}

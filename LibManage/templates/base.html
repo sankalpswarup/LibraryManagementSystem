@@ -23,6 +23,9 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="log">Log</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/addBook">Add Book</a>
         </li> 
         <li class="nav-item dropdown">
@@ -39,9 +42,15 @@
           <a class="nav-link active" aria-current="page" href="profile">Profile</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+      <form class="d-flex" action="searched_author" method='post'>
+      {% csrf_token %}
+        <button class="btn btn-outline-success" type="submit">Search Author</button>
+        <input class="form-control me-2" type="search" placeholder="Search Author" aria-label="Search" name='q'>
+      </form>
+      <form class="d-flex" action="searched_book" method='post'>
+      {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search Book" aria-label="Search" name='q'>
+        <button class="btn btn-outline-success" type="submit">Search Book</button>
       </form>
     </div>
   </div>

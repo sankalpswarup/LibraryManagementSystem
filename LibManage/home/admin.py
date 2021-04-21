@@ -7,5 +7,4 @@ admin.site.register(Profile)
 admin.site.register(BorrowedBook)
 admin.site.register(BookRequest)
 
-
 # by registering the model, they could be seen in the admin page

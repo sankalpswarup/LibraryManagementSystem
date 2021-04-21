@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}LibManage{% endblock title %}
 {% block body %}
 <h3 style="align:center">Add a New Book</h3>
@@ -17,10 +18,27 @@
   <input type="text" id="publication" name="publication"><br>
   <br>
   <label for="genre">Genre:</label><br>
-  <input type="text" id="genre" name="genre"><br>
+  <select id='genre' name='genre'>
+    <option value='Science & Technology'>Science & Technology</option>
+    <option value='Humanities & Social Sciences'>Humanities & Social Sciences</option>
+    <option value='Fiction'>Fiction</option>
+    <option value='Romance'>Romance</option>
+    <option value='Graphic Novel'>Graphic Novel</option>
+    <option value='Short Story & Essays'>Short Story & Essays</option>
+    <option value='Poem'>Poem</option>
+    <option value='Memoir & Autobiography'>Memoir & Autobiography</option>
+    <option value='Food & Drink'>Food & Drink</option>
+    <option value='Art & Photography'>Art & Photography</option>
+    <option value='Self-help & Personal Growth'>Self-help & Personal Growth</option>
+    <option value='Mythology'>Mythology</option>
+    <option value='Travel'>Travel</option>
+  </select>
   <br>
-  <label for="available">Availability</label><br>
-  <input type="text" id="available" name="available"><br>
+  <label for="available">Availability:</label><br>
+  <select id='available' name='available'>
+    <option value='Available'>Available</option>
+    <option value='Not Available'>Not Available</option>
+  </select>
   <br>
   <label for="summary">Summary</label><br>
   <input type="textarea" id="summary" name="summary"><br>

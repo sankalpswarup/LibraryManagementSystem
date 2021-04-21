@@ -14,15 +14,23 @@ variables are specified in base.html, thos can be changed {% endcomment %}
 
 {%if request.user.is_authenticated%}
     {% ifnotequal request.user.profile.account_type 'user'%}
-        <form action='edit_book' method='get'>
+        <form action='edit_book' method='post'>
         {% csrf_token %}
             <input type='hidden' value={{id}} name='id'>
             <button type='submit'>Edit Book Details</button>
         </form>
     {% else %}
-        <form action='profile' method='post'>
+        <form action='borrow_book' method='post'>
         {% csrf_token %}
             <input type='hidden' value={{id}} name='id'>
+            <label for='period'>Period of Issue:</label>
+            <select id='period' name='period'>
+                <option value="2">2 days</option>
+                <option value="5">5 days</option>
+                <option value="7">7 days</option>
+                <option value="10">10 days</option>
+                <option value="14">14 days</option>
+            </select>
             <button type='submit'>Borrow Book</button>
         </form>
     {%endifnotequal%}

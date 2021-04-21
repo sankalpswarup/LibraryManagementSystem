@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock title %}
+{% block body %}
+    
+    {% for bookitem in books %}
+        <form action='\bookpage' method='post'>
+        {% csrf_token %}
+            <h5>Title : {{bookitem.title}}</h5>
+            <p>Author : {{bookitem.author}}
+            <input type='hidden' value={{bookitem.id}} name='id'>
+            <button type='submit'>Open</button>
+            </p>
+            <hr>
+        </form>
+    {%endfor%}
+{% endblock body %}

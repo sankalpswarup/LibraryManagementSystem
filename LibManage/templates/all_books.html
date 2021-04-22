@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
-{% comment %} after extending from base.html, wherever 
-variables are specified in base.html, thos can be changed {% endcomment %}
 
 {% block title %}LibManage{% endblock title %}
 {% block body %}
 
-    {% for bookitem in allBooks %}
-        <form action='\bookpage' method='post'>
-        {% csrf_token %}
-            <h5>Title : {{bookitem.title}}</h5>
-            <p>Author : {{bookitem.author}}
-            <input type='hidden' value={{bookitem.id}} name='id'>
-            <button type='submit'>Open</button>
-            </p>
-            <hr>
-        </form>
-    {%endfor%}
+    {% if allBooks %}
+        {% for bookitem in allBooks %}
+            <form action='\bookpage' method='get'>
+                <h5>Title : {{bookitem.title}}</h5>
+                <p>Author : {{bookitem.author}}
+                <input type='hidden' value={{bookitem.id}} name='id'>
+                <button type='submit'>Open</button>
+                </p>
+                <hr>
+            </form>
+        {%endfor%}
+    {% else %}
+        <h4>No books in library</h4>
+    {% endif %}
 
 {% endblock body %}

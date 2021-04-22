@@ -6,7 +6,11 @@ variables are specified in base.html, thos can be changed {% endcomment %}
 
 {% ifnotequal user.profile.account_type 'user' %}
     <hr>
-    <h4>Book Borrowing Requests</h4>
+    {% if book_requests %}
+        <h4>Book Borrowing Requests</h4>
+    {% else %}
+        <h4>No Book Borrowing Requests at present</h4>
+    {% endif %}
     {% for item in book_requests %} 
         <p><b>Book Requested:</b>{{item.title}}  by   <b>User:</b>{{item.user}}</p>
         <p>
@@ -26,7 +30,11 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     {% endfor %}
     
     <hr>
-    <h4>Books Borrowed</h4>
+    {% if borrowed_books %}
+        <h4>Books Borrowed</h4>
+    {% else %}
+        <h4>No Books are borrowed at present</h4>
+    {% endif %}
     {% for request in borrowed_books %}
         <form action='book_returned' method='post'>
         {% csrf_token %}
@@ -40,14 +48,22 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     {% endfor %}
 {% else %}
     <hr>
-    <h4>Your Current pending requests:</h4>
+    {% if book_requests %}
+        <h4>Your Current pending requests:</h4>
+    {% else %}
+        <h4>You have no pending requests</h4>
+    {% endif %}
     <p><u>If you are unable to see some requests, they might be rejected by the librarian,
      or accepted, in which case you should see that book in <b>Borrowed Books</b> section</u><p>
     {% for request in book_requests %}
         <p><b>Book Title:</b>{{request.title}} | <b>Author:</b>{{request.author}}  |  For Period:{{request.period}}</p>
     {% endfor %}
     <hr>
-    <h4>Books Borrowed by you</h4>
+    {% if borrowed_books %}
+        <h4>Books Borrowed by you</h4>
+    {% else %}
+        <h4>You have not borrowed any book from library at present</h4>
+    {% endif %}
     {% for borrowed_book in borrowed_books %}
         <p><b>Book Title:</b>{{borrowed_book.title}} | <b>Author:</b>{{borrowed_book.author}}</p>
         <p><b>Date of Issue:</b>{{borrowed_book.date}}  |  <b>Due Date to return:</b>{{borrowed_book.due_date}}

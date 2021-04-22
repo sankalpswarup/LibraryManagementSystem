@@ -13,21 +13,19 @@ urlpatterns = [
     path('bookpage', views.bookpage, name='bookpage'),
     path('logout_user', views.logout_user, name='logout_user'),
     path('edit_book', views.edit_book, name='edit_book'),
-    path('change_access', views.change_access, name='change_access'),
     path('book_returned', views.book_returned, name='book_returned'),
     path('borrow_book', views.borrow_book, name='borrow_book'),
     path('request_accepted', views.request_accepted, name='request_accepted'),
     path('request_rejected', views.request_rejected, name='request_rejected'),
     path('log', views.log, name='log'),
     path('book_edited', views.book_edited, name='book_edited'),
-    path('sort_genre', views.sort_genre, name='sort_genre'),
-    path('searched_book', views.searched_book, name='searched_book'),
-    path('searched_author', views.searched_author, name='searched_author'),
+    path('book_searched', views.book_searched, name='book_searched'),
     path('renew_period', views.renew_period, name='renew_period'),
     path('book_lost', views.book_lost, name='book_lost'),
     path('display_users', views.display_users, name='display_users'),
     path('penalty_returned', views.penalty_returned, name='penalty_returned'),
     path('change_account_type', views.change_account_type, name='change_account_type'),
+    path('delete_book', views.delete_book, name='delete_book'),
 
 
     

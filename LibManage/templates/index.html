@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Login{% endblock title %}
+{% block title %}LibManage - Homepage{% endblock title %}
 {% block body %}
     
 
@@ -10,13 +10,14 @@
     {%if request.user.is_authenticated%}
         {% ifnotequal request.user.profile.account_type 'user'%}
             <form action='display_users'>
-                <button type='submit'>View All Users of Library</button>
+                <button type='submit'>View Users of Library</button>
             </form>
         {% endifnotequal %}
     {% endif %}
     <hr>
-    <form action='sort_genre' method='post'>
+    <form action='book_searched' method='get'>
     {% csrf_token %}
+        <input type='hidden' value='genre' name='type'>
         <label for="genre">Select Genre:</label><br>
         <select id='genre' name='genre'>
             <option value='Science & Technology'>Science & Technology</option>

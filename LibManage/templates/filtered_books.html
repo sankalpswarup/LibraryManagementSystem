@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock title %}
 {% block body %}
-    
+    {% if books %}
+    <h2>Relevant Books in Library</h2>
+    <hr>
+    {% else %}
+    <h4>No relevant book found</h4>
+    {% endif %}
     {% for bookitem in books %}
-        <form action='\bookpage' method='post'>
+        <form action='\bookpage' method='get'>
         {% csrf_token %}
             <h5>Title : {{bookitem.title}}</h5>
             <p>Author : {{bookitem.author}}

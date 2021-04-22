@@ -9,7 +9,7 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     <b>Email:</b>{{ user.email }}<br>
     <b>Account Type:</b>{{ user.profile.account_type }}<br>
     {% ifequal user.profile.account_type 'user' %}
-    <b>Penalty Amount:</b> Rs {{ user.profile.penalty }}<br>
+    <b>Penalty Amount Due:</b> Rs {{ user.profile.penalty }}<br>
     {% endifequal %}
 </p>
 

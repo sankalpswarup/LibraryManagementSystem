@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -8,3 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
             'password1',
             'password2'
         ]
+
+
+class PenaltyForm(forms.Form):
+    penalty_amount = forms.IntegerField(label='Penalty Amount Returned: Rs')

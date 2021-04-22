@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}LibManage{% endblock title %}
+{% block body %}
+<h3>USERS</h3>
+<h5>Search for a user</h5>
+<form action='display_users' method='post' Required>
+{% csrf_token %}
+    <p>
+    <input type="search" placeholder="Enter Username" name='uname'>
+    <button type="submit">Search User</button>
+    </p>
+</form>
+<p>
+    {% for user_object in user_set %}
+        {% ifequal user.profile.account_type 'librarian' %}
+        {% comment %} if librarian is viewing this page {% endcomment %}
+            {% ifequal user_object.profile.account_type 'user' %}
+                <hr>
+                <b>Username:</b>{{ user_object.username}}<br>
+                <b>Email:</b>{{ user_object.email }}<br>
+                <b>Penalty Due:</b> Rs {{ user_object.profile.penalty }}<br>
+                {% ifnotequal user_object.profile.penalty 0 %}
+                <form action="penalty_returned" method="post">
+                    {% csrf_token %}
+                    {{ penalty_form }}
+                    <input type='hidden' value={{user_object.id}} name='id'>
+                    <input type="submit" value="Submit">
+                </form>
+                {% endifnotequal %}
+                <hr>
+            {% endifequal %}
+        {% else%}
+        {% comment %} if admin is viewing this page {% endcomment %}
+            {% ifnotequal user_object.profile.account_type 'admin' %}
+            {% comment %} profiles of admin need not be displayed {% endcomment %}
+                <hr>
+                <b>Username:</b>{{ user_object.username}}<br>
+                <b>Email:</b>{{ user_object.email }}<br>
+                <b>Account Type:</b>{{user_object.profile.account_type}}<br>
+                {% ifequal user_object.profile.account_type 'user' %}
+                    <b>Penalty Due:</b> Rs {{ user_object.profile.penalty }}<br>
+                    {% ifnotequal user_object.profile.penalty 0 %}
+                    <form action="penalty_returned" method="post">
+                        {% csrf_token %}
+                        {{ penalty_form }}
+                        <input type='hidden' value={{user_object.id}} name='id'>
+                        <input type="submit" value="Submit">
+                    </form>
+                    {% endifnotequal %}
+                {% endifequal %}
+                <form action='change_account_type' method='post'>
+                {% csrf_token %}
+                    <label for='account_type'>Change Account Type:</label>
+                    <select id='account_type' name='account_type'>
+                        <option value='user'>User</option>
+                        <option value='librarian'>Librarian</option>
+                    </select>
+                    <input type='hidden' value={{user_object.id}} name='id'>
+                    <button type='submit'>Submit</button>
+                </form>
+            {% endifnotequal %}
+        {% endifequal %}
+    {% endfor %}
+</p>
+
+{% endblock body %}

@@ -25,6 +25,9 @@ urlpatterns = [
     path('searched_author', views.searched_author, name='searched_author'),
     path('renew_period', views.renew_period, name='renew_period'),
     path('book_lost', views.book_lost, name='book_lost'),
+    path('display_users', views.display_users, name='display_users'),
+    path('penalty_returned', views.penalty_returned, name='penalty_returned'),
+    path('change_account_type', views.change_account_type, name='change_account_type'),
 
 
     

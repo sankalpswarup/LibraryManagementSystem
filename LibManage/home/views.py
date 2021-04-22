@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from .models import Book, BookRequest, BorrowedBook
 from django.shortcuts import redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PenaltyForm
 from datetime import datetime,timedelta
+
 
 # Create your views here.
 def all_books(request): # this is home page of website
@@ -298,6 +299,58 @@ def book_lost(request):
         request.user.profile.penalty=new_penalty
         request.user.profile.save()
         return redirect('profile')
+
+def display_users(request):
+    if(request.user.is_authenticated):
+        if(request.user.profile.account_type!='user'):
+            if request.method=='POST':
+                uname=request.POST.get('uname')
+                allusers=User.objects.filter(username__contains=uname)
+            else:
+                allusers=User.objects.all()
+            form = PenaltyForm()
+            context = {
+                'penalty_form':form,
+                'user_set':allusers
+            }
+            return render(request,'users.html',context)
+
+
+def penalty_returned(request):
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PenaltyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print("Form is valid")
+            # process the data in form.cleaned_data as required
+            amount_given = form.cleaned_data['penalty_amount']
+            user_object=User.objects.get(id=request.POST.get('id'))
+            print(amount_given)
+            old_penalty=user_object.profile.penalty
+            print(old_penalty)
+            new_penalty=old_penalty-amount_given
+            print(new_penalty)
+            user_object.profile.penalty=new_penalty
+            user_object.profile.save()
+            # redirect to a new URL:
+            return redirect("display_users")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PenaltyForm()
+
+    return render(request, 'name.html', {'form': form})
+
+def change_account_type(request):
+    if request.method=='POST':
+        user_id=request.POST.get('id')
+        new_account_type=request.POST.get('account_type')
+        user_object=User.objects.get(id=user_id)
+        user_object.profile.account_type=new_account_type
+        user_object.profile.save()
+        return redirect('display_users')
+
 
 
 

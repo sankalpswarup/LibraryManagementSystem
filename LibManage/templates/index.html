@@ -6,6 +6,14 @@
     <form action='all_books'>
         <button type='submit'>View All Books in Library</button>
     </form>
+
+    {%if request.user.is_authenticated%}
+        {% ifnotequal request.user.profile.account_type 'user'%}
+            <form action='display_users'>
+                <button type='submit'>View All Users of Library</button>
+            </form>
+        {% endifnotequal %}
+    {% endif %}
     <hr>
     <form action='sort_genre' method='post'>
     {% csrf_token %}

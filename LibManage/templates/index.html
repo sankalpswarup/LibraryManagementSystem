@@ -2,11 +2,11 @@
 {% block title %}LibManage - Homepage{% endblock title %}
 {% block body %}
     
-
+<br>
     <form action='all_books'>
         <button type='submit'>View All Books in Library</button>
     </form>
-
+    <hr>
     {%if request.user.is_authenticated%}
         {% ifnotequal request.user.profile.account_type 'user'%}
             <form action='display_users'>
@@ -18,7 +18,7 @@
     <form action='book_searched' method='get'>
     {% csrf_token %}
         <input type='hidden' value='genre' name='type'>
-        <label for="genre">Select Genre:</label><br>
+        <label for="genre">Filter Books by Genre:</label><br>
         <select id='genre' name='genre'>
             <option value='Science & Technology'>Science & Technology</option>
             <option value='Humanities & Social Sciences'>Humanities & Social Sciences</option>

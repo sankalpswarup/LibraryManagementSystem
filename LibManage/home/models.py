@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 
-# Create your models here.
+# set of genres
 GENRES = (
     ('Humanities & Social Sciences','Humanities & Social Sciences'),
     ('Science & Technology','Science & Technology'),
@@ -20,10 +20,13 @@ GENRES = (
     ('Mythology','Mythology'),
     ('Travel','Travel')
 )
+
 STOCK = (
     ('Available','Available'),
     ('Not Available','Not Available')
 )
+
+# database object for a book
 class Book(models.Model):
     title = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=100)
@@ -35,10 +38,13 @@ class Book(models.Model):
     available = models.CharField(max_length=15,
                   choices=STOCK,
                   default="Available")
+    quantity = models.IntegerField(default=0)
     summary = models.TextField()
     objects = models.Manager() # this is written because VSC was giving error that class has no objcts
     def __str__(self):
         return self.title 
+
+# databse model for a request to borrow/renew a book
 class BookRequest(models.Model):
     user = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=100)
@@ -50,6 +56,7 @@ class BookRequest(models.Model):
         str="Title:"+self.title+" ---- User:"+self.user 
         return str
 
+# database model to store the books borrowed from librarry at any time
 class BorrowedBook(models.Model):
     user = models.CharField(max_length=200)
     ISBN = models.CharField(max_length=100)
@@ -69,6 +76,13 @@ ACCOUNT_TYPES = (
     ('admin','admin')
 )
 
+class system_variable_values(models.Model):
+    book_lost_penalty_amount=models.IntegerField(default=1000)   # per book
+    issue_period_expired_penalty=models.IntegerField(default=10) # per day
+    objects = models.Manager()
+
+
+# this adds account_type field to the user object of django
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     account_type = models.CharField(max_length=9,
@@ -88,10 +102,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-    
 
-# the 2 lines above are written so that name of book is displayed in the admin portal
-
+# Comments for self help 
 # to detect changes 2 tasks have to be done
 # first you have to register your model, in admin.py
 # second, register your app, in settings.py

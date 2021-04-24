@@ -59,6 +59,7 @@ variables are specified in base.html, thos can be changed {% endcomment %}
         <p><b>Book Title:</b>{{request.title}} | <b>Author:</b>{{request.author}}  |  For Period:{{request.period}}</p>
     {% endfor %}
     <hr>
+
     {% if borrowed_books %}
         <h4>Books Borrowed by you</h4>
     {% else %}
@@ -87,6 +88,5 @@ variables are specified in base.html, thos can be changed {% endcomment %}
         <button type='submit'>Book Lost</button>
         </form>
     {% endfor %}
-    <hr>
-{% endifnotequal %}
+{%endifnotequal%}
 {% endblock body %}

@@ -26,6 +26,8 @@ urlpatterns = [
     path('penalty_returned', views.penalty_returned, name='penalty_returned'),
     path('change_account_type', views.change_account_type, name='change_account_type'),
     path('delete_book', views.delete_book, name='delete_book'),
+    path('issue_book', views.issue_book, name='issue_book'),
+    path('update_penalty_amount', views.update_penalty_amount, name='update_penalty_amount'),
 
 
     

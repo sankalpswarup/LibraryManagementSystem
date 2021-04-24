@@ -10,11 +10,50 @@ variables are specified in base.html, thos can be changed {% endcomment %}
 <p><b>ISBN:</b>{{isbn}}</p>
 <p><b>Genre:</b>{{genre}}</p>
 <p><b>Summary:</b>{{summary}}</p>
-<p><b>Availability:</b>{{available}}</p>
+<p><b>No. of books in library at present:</b>{{quantity}}</p>
 
 {%if request.user.is_authenticated%}
+    {% ifequal request.user.profile.account_type 'user'%}
+        {% if is_borrowed %}
+            <h5>You have already borrowed this book, and not returned yet</h5>
+        {% else %}
+            <form action='borrow_book' method='post'>
+            {% csrf_token %}
+                <input type='hidden' value={{id}} name='id'>
+                <label for='period'>Period of Issue:</label>
+                <select id='period' name='period'>
+                    <option value="2">2 days</option>
+                    <option value="5">5 days</option>
+                    <option value="7">7 days</option>
+                    <option value="10">10 days</option>
+                    <option value="14">14 days</option>
+                </select>
+                <button type='submit'>Borrow Book</button>
+            </form>
+            
+        {% endif %}
+    {% endifequal %}
+    
     {% ifnotequal request.user.profile.account_type 'user'%}
-        <form action='edit_book' method='post'>
+    <hr>
+    <h5>Issue Book</h5>
+    <form action='issue_book' method='post' required>
+    {% csrf_token %}
+    <label for='user'>Username:</label>
+    <input type='text' name='user' id='user' placeholder='who wants this book'>
+    <input type='hidden' value={{id}} name='id'>
+    <label for='period'>Period of Issue:</label>
+        <select id='period' name='period'>
+            <option value="2">2 days</option>
+            <option value="5">5 days</option>
+            <option value="7">7 days</option>
+            <option value="10">10 days</option>
+            <option value="14">14 days</option>
+        </select>
+    <button type='submit'>Issue\Renew Book</button>
+    </form>
+    <hr>
+        <form action='edit_book' method='get'>
         {% csrf_token %}
             <input type='hidden' value={{id}} name='id'>
             <button type='submit'>Edit Book Details</button>
@@ -27,22 +66,8 @@ variables are specified in base.html, thos can be changed {% endcomment %}
             <input type='password' name='password' id='password'>
             <button type='submit'>Delete Book from Database</button>
         </form>
-        </hr>
+        <hr>
     {% endifnotequal %}
-    <form action='borrow_book' method='post'>
-    {% csrf_token %}
-        <input type='hidden' value={{id}} name='id'>
-        <label for='period'>Period of Issue:</label>
-        <select id='period' name='period'>
-            <option value="2">2 days</option>
-            <option value="5">5 days</option>
-            <option value="7">7 days</option>
-            <option value="10">10 days</option>
-            <option value="14">14 days</option>
-        </select>
-        <button type='submit'>Borrow Book</button>
-    </form>
-    
 {% else %}   
     <p><b>Please login to be able to burrow book or edit book details</b></p>
 {%endif%}

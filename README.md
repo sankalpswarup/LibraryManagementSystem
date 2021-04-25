@@ -17,21 +17,21 @@
 
 # Sample Accounts
 Some acounts are already created in the database for testing purposes, the credentials for which are given below:
-1) Account 1 - Access Level: Admin
-    username:admin
+1) Account 1 - Access Level: Admin,
+    username:admin,
     password:admin
-2) Account 2 - Access Level: Librarian
-    username:user1
+2) Account 2 - Access Level: Librarian,
+    username:user1,
     password:pass1
-3) Account 3 - Access Level: Librarian
-    username:user2
+3) Account 3 - Access Level: Librarian,
+    username:user2,
     password:pass2
-4) Account 4 - Access Level: User
-    username:user3
+4) Account 4 - Access Level: User,
+    username:user3,
     password:pass3
-5) Account 5 - Access Level: User
-    username:user4
+5) Account 5 - Access Level: User,
+    username:user4,
     password:pass4
-6) Account 6 - Access Level: User
-    username:user5
+6) Account 6 - Access Level: User,
+    username:user5,
     password:pass5

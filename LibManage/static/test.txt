@@ -2,6 +2,3 @@ this is a test file, and it defined to test static files in django
 
 
 note that static files will be displayed as it is and can be viewed by anyone.
-
-so do not keep any data in static files which could create a security loop hole
-

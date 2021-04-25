@@ -11,10 +11,11 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     {% else %}
         <h4>No Book Borrowing Requests at present</h4>
     {% endif %}
-    {% for item in book_requests %} 
+    {% for item,qty in book_requests %} 
         <p><b>Book Requested:</b>{{item.title}}  by   <b>User:</b>{{item.user}}</p>
         <p>
-        <b>For Period:</b>{{item.period}} days
+        <b>For Period:</b>{{item.period}} days   |   <b>Present no. of these books in library:</b>{{qty}}
+
         <form action='request_accepted' method='post'>
         {% csrf_token %}
         <input type="hidden" name= 'id' value={{item.id}}>
@@ -87,6 +88,7 @@ variables are specified in base.html, thos can be changed {% endcomment %}
         <input type='hidden' value={{borrowed_book.id}} name='id'>
         <button type='submit'>Book Lost</button>
         </form>
+        <hr>
     {% endfor %}
 {%endifnotequal%}
 {% endblock body %}

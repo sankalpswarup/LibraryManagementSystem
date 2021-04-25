@@ -12,16 +12,16 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     <b>Penalty Amount Due:</b> Rs {{ user.profile.penalty }}<br>
     {% else %}
     <hr>
-    <b>Penalty user has to pay on losing a book:</b>{{penalty1}}
+    <b>Penalty user has to pay on losing a book: Rs </b>{{penalty1}}
     <br>
-    <b>Penalty user has to pay when issue period expires per extra day of not returning:</b>{{penalty2}}
+    <b>Penalty user has to pay when issue period expires per extra day of not returning: Rs </b>{{penalty2}}
     <hr>
     {% endifequal %}
     {% ifequal user.profile.account_type 'admin' %}
     <form action='update_penalty_amount' method='post' Required>
     {% csrf_token %}
         
-        <label for='penalty'>Penalty per book/ per day:</label>
+        <label for='penalty'>Penalty per book/ per day: Rs</label>
         <input type='number' name='penalty' id='penalty' Required>
         <button type='submit'>Change Penalty Amount:</button>
         <label for='type'>Penalty for:</label>

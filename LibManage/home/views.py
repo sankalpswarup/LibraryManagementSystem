@@ -43,8 +43,15 @@ def log(request):
             # fetching all book requests and books borrowed and rendering them
             book_requests = BookRequest.objects.all()
             borrowed_books = BorrowedBook.objects.all()
+            qtys=[]
+            for request_item in book_requests:
+                book_item=Book.objects.filter(title=request_item.title,ISBN=request_item.ISBN)
+                if book_item:
+                    qtys.append(book_item[0].quantity)
+                else:
+                    qtys.append(0)
             context = {
-                'book_requests':book_requests,
+                'book_requests':zip(book_requests,qtys),
                 'borrowed_books':borrowed_books,
             }
             return render(request, 'log.html', context)

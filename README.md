@@ -5,7 +5,7 @@
 2) python installed with pip configured, can be downloaded and installed from https://www.python.org/downloads/
 3) While installing python remember to tick the checkbox- ADD python {version} to PATH
 4) django module of python installed, to install type the following in terminal- pip install django
-5) dotenv module of python installed, to install type the following in terminal- pip install dotenv
+5) dotenv module of python installed, to install type the following in terminal- pip install python-dotenv
 
 # Running the Application
 1) First clone this repo on your computer
@@ -35,3 +35,7 @@ Some acounts are already created in the database for testing purposes, the crede
 6) Account 6 - Access Level: User,
     username:user5,
     password:pass5
+
+# Notes
+1) Bootstrap has been used to give basic styling to the website, so while running this locally on your computer on the development server, stay connected to internet to see the actual website.
+2) The available field in database is redundant, it is replaced with quantity at most places, but not all so it is not yet deleted from Book model.

@@ -18,10 +18,10 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     <hr>
     <form action='update_penalty_amount' method='post' Required>
     {% csrf_token %}
-        <button type='submit'>Change Penalty Amount:</button>
+        
         <label for='penalty'>Penalty per book/ per day:</label>
         <input type='number' name='penalty' id='penalty' Required>
-
+        <button type='submit'>Change Penalty Amount:</button>
         <label for='type'>Penalty for:</label>
         <select name='type' id='type'>
             <option value='book_lost'>Losing a book</option>

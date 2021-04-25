@@ -5,16 +5,16 @@
 <form action="/book_edited" method="post" Required>
 {% csrf_token %}
   <label for="title">Title:</label><br>
-  <input type="text" id="title" name="title" value='{{title}}'><br>
+  <input type="text" id="title" name="title" value='{{title}}' Required><br>
   <br>
   <label for="ISBN">ISBN:</label><br>
-  <input type="text" id="ISBN" name="ISBN" value='{{isbn}}'><br>
+  <input type="text" id="ISBN" name="ISBN" value='{{isbn}}' Required><br>
   <br>
   <label for="">author</label><br>
-  <input type="text" id="author" name="author" value='{{author}}'><br>
+  <input type="text" id="author" name="author" value='{{author}}' Required><br>
   <br>
   <label for="publication">publication</label><br>
-  <input type="text" id="publication" name="publication" value='{{publication}}'><br>
+  <input type="text" id="publication" name="publication" value='{{publication}}' Required><br>
   <br>
   <label for="genre">Genre:</label><br>
   <select id='genre' name='genre'>
@@ -34,11 +34,11 @@
   </select>
   <br>
   <label for="quantity">Quantity:</label><br>
-  <input type='number' id="quantity" name="quantity" value={{quantity}}>
+  <input type='number' id="quantity" name="quantity" value={{quantity}} Required>
   </select>
   <br>
   <label for="summary">Summary</label><br>
-  <input type="textarea" id="summary" name="summary" value='{{summary}}'><br>
+  <input type="textarea" id="summary" name="summary" value='{{summary}}' Required><br>
   <br>
   <input type='hidden' value={{id}} name='id'>
   <button class="btn btn-primary" type="submit">Submit</button>

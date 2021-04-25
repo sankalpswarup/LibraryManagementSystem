@@ -45,12 +45,12 @@
       <form class="d-flex" action="book_searched" method='get'>
       {% csrf_token %}
         <button class="btn btn-outline-success" type="submit">Search By Author</button>
-        <input type='hidden' value='author' name='type'>
-        <input class="form-control me-2" type="search" placeholder="Enter Author" aria-label="Search" name='q'>
+        <input type='hidden' value='author' name='type' >
+        <input class="form-control me-2" type="search" placeholder="Enter Author" aria-label="Search" name='q' Required>
       </form>
       <form class="d-flex" action="book_searched" method='get'>
       {% csrf_token %}
-        <input class="form-control me-2" type="search" placeholder="Enter Title" aria-label="Search" name='q'>
+        <input class="form-control me-2" type="search" placeholder="Enter Title" aria-label="Search" name='q' Required>
         <input type='hidden' value='title' name='type'>
         <button class="btn btn-outline-success" type="submit">Search By Title</button>
       </form>

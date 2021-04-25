@@ -37,10 +37,10 @@ variables are specified in base.html, thos can be changed {% endcomment %}
     {% ifnotequal request.user.profile.account_type 'user'%}
     <hr>
     <h5>Issue Book</h5>
-    <form action='issue_book' method='post' required>
+    <form action='issue_book' method='post' Required>
     {% csrf_token %}
     <label for='user'>Username:</label>
-    <input type='text' name='user' id='user' placeholder='who wants this book'>
+    <input type='text' name='user' id='user' placeholder='who wants this book' Required>
     <input type='hidden' value={{id}} name='id'>
     <label for='period'>Period of Issue:</label>
         <select id='period' name='period'>
@@ -63,7 +63,7 @@ variables are specified in base.html, thos can be changed {% endcomment %}
         {% csrf_token %}
             <input type='hidden' value={{id}} name='id'>
             <label for='password'>Enter password to delete book</label>
-            <input type='password' name='password' id='password'>
+            <input type='password' name='password' id='password' Required>
             <button type='submit'>Delete Book from Database</button>
         </form>
         <hr>

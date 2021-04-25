@@ -6,16 +6,16 @@
 <form action="/addBook" method="post" Required>
 {% csrf_token %}
   <label for="title">Title:</label><br>
-  <input type="text" id="title" name="title"><br>
+  <input type="text" id="title" name="title" Required><br>
   <br>
   <label for="ISBN">ISBN:</label><br>
-  <input type="text" id="ISBN" name="ISBN"><br>
+  <input type="text" id="ISBN" name="ISBN" Required><br>
   <br>
   <label for="">author</label><br>
-  <input type="text" id="author" name="author"><br>
+  <input type="text" id="author" name="author" Required><br>
   <br>
   <label for="publication">publication</label><br>
-  <input type="text" id="publication" name="publication"><br>
+  <input type="text" id="publication" name="publication" Required><br>
   <br>
   <label for="genre">Genre:</label><br>
   <select id='genre' name='genre'>
@@ -35,10 +35,10 @@
   </select>
   <br>
   <label for="quantity">Quantity:</label><br>
-  <input type='number' id='quantity' name='quantity'>
+  <input type='number' id='quantity' name='quantity' Required>
   <br>
   <label for="summary">Summary</label><br>
-  <input type="textarea" id="summary" name="summary"><br>
+  <input type="textarea" id="summary" name="summary" Required><br>
   <br>
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>

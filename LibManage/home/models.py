@@ -63,7 +63,7 @@ class BorrowedBook(models.Model):
     title = models.CharField(max_length=200) 
     author = models.CharField(max_length=200)
     date=models.DateField()
-    due_date=models.DateField(default=datetime.today())
+    due_date=models.DateField()
     period=models.IntegerField()
     objects = models.Manager()
     def __str__(self):

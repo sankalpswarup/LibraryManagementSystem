@@ -8,11 +8,11 @@
     </form>
     <hr>
     {%if request.user.is_authenticated%}
-        {% ifnotequal request.user.profile.account_type 'user'%}
+        {% if request.user.profile.account_type != 'user'%}
             <form action='display_users'>
                 <button type='submit'>View Users of Library</button>
             </form>
-        {% endifnotequal %}
+        {% endif %}
     {% endif %}
     <hr>
     <form action='book_searched' method='get'>
